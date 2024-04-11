@@ -83,11 +83,9 @@ BOARD_AVB_ENABLE := true
 BOARD_USES_QCNE := false
 TARGET_BOARD_AUTO := true
 TARGET_USES_AOSP := true
-
 ifeq ($(TARGET_SINGLE_TREE), true)
   TARGET_USES_GAS := true
 endif
-
 TARGET_USES_QCOM_BSP := false
 TARGET_NO_TELEPHONY := true
 TARGET_USES_QTIC := false
