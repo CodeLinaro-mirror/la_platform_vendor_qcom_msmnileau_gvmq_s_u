@@ -57,8 +57,10 @@ PRODUCT_VENDOR_PROPERTIES += \
 SHIPPING_API_LEVEL := 32
 PRODUCT_SHIPPING_API_LEVEL := $(SHIPPING_API_LEVEL)
 
+ifeq (true,$(call math_gt_or_eq,$(SHIPPING_API_LEVEL),34))
 # Enable support for APEX updates
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+endif #SHIPPING_API_LEVEL
 
 ALLOW_MISSING_DEPENDENCIES := true
 ENABLE_AB ?= true
