@@ -805,6 +805,12 @@ ifeq ($(TARGET_SINGLE_TREE), true)
   PRODUCT_PACKAGES += vendor.qti.qesdsys
 endif
 
+ifeq ($(TARGET_SINGLE_TREE), true)
+# Enable allowlist for some aosp packages that should not be scanned in a "stopped" state
+# # Some CTS test case failed after enabling feature config_stopSystemPackagesByDefault
+PRODUCT_PACKAGES += initial-package-stopped-states-aosp.xml
+endif
+
 ###################################################################################
 # This is the End of target.mk file.
 # Now, Pickup other split product.mk files:
