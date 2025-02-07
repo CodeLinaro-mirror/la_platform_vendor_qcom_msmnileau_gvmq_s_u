@@ -637,15 +637,11 @@ PRODUCT_VENDOR_PROPERTIES += media.stagefright.enable-player=true \
                             media.stagefright.enable-scan=true \
                             mmp.enable.3g2=true \
                             media.aac_51_output_enabled=true \
-                            mm.enable.smoothstreaming=true \
                             persist.mm.enable.prefetch=true
 
 # system props for the data modules
 PRODUCT_VENDOR_PROPERTIES += ro.vendor.use_data_netmgrd=true \
                             persist.vendor.data.mode=concurrent
-
-#system props for time-services
-PRODUCT_VENDOR_PROPERTIES += persist.timed.enable=true
 
 # system prop for opengles version
 # 196608 is decimal for 0x30000 to report version 3
@@ -655,9 +651,6 @@ PRODUCT_VENDOR_PROPERTIES += ro.opengles.version=196610
 
 # system prop to turn on CdmaLTEPhone always
 PRODUCT_VENDOR_PROPERTIES += telephony.lteOnCdmaDevice=1
-
-#Simulate sdcard on /data/media
-PRODUCT_VENDOR_PROPERTIES += persist.fuse_sdcard=true
 
 #system prop for wipower support
 PRODUCT_VENDOR_PROPERTIES += ro.bluetooth.emb_wp_mode=false \
@@ -809,6 +802,12 @@ ifeq ($(TARGET_SINGLE_TREE), true)
   endif
 
   PRODUCT_PACKAGES += vendor.qti.qesdsys
+endif
+
+ifeq ($(TARGET_SINGLE_TREE), true)
+# Enable allowlist for some aosp packages that should not be scanned in a "stopped" state
+# # Some CTS test case failed after enabling feature config_stopSystemPackagesByDefault
+PRODUCT_PACKAGES += initial-package-stopped-states-aosp.xml
 endif
 
 ###################################################################################
