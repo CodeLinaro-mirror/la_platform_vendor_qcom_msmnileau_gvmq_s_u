@@ -636,7 +636,6 @@ PRODUCT_VENDOR_PROPERTIES += media.stagefright.enable-player=true \
                             media.stagefright.enable-fma2dp=true \
                             media.stagefright.enable-scan=true \
                             mmp.enable.3g2=true \
-                            media.aac_51_output_enabled=true \
                             persist.mm.enable.prefetch=true
 
 # system props for the data modules
@@ -653,13 +652,8 @@ PRODUCT_VENDOR_PROPERTIES += ro.opengles.version=196610
 PRODUCT_VENDOR_PROPERTIES += telephony.lteOnCdmaDevice=1
 
 #system prop for wipower support
-PRODUCT_VENDOR_PROPERTIES += ro.bluetooth.emb_wp_mode=false \
-                            ro.bluetooth.wipower=false
-
-PRODUCT_VENDOR_PROPERTIES += persist.vendor.service.bt.a2dp.sink=true \
-                            persist.vendor.btstack.enable.splita2dp=false \
-                            persist.vendor.service.bdroid.sibs=false \
-                            persist.bt.clock_boottime_alarm=false
+PRODUCT_VENDOR_PROPERTIES += persist.vendor.service.bdroid.sibs=false \
+                             persist.bt.clock_boottime_alarm=false
 
 # system prop for Hardware type Automotive
 PRODUCT_VENDOR_PROPERTIES += ro.hardware.type=automotive
