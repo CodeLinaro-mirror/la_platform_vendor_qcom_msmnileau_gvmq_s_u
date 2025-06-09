@@ -805,6 +805,8 @@ ifeq ($(TARGET_SINGLE_TREE), true)
 PRODUCT_PACKAGES += initial-package-stopped-states-aosp.xml
 endif
 
+PRODUCT_PACKAGES += android.hardware.thermal-service.example
+
 ###################################################################################
 # This is the End of target.mk file.
 # Now, Pickup other split product.mk files:
