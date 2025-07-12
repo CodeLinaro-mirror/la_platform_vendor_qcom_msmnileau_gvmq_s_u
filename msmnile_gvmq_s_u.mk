@@ -653,17 +653,6 @@ PRODUCT_VENDOR_PROPERTIES += ro.hardware.type=automotive
 
 PRODUCT_VENDOR_PROPERTIES += ro.hardware.sensors=msmnile.asm_auto
 
-# system prop for RmNet Data
-PRODUCT_VENDOR_PROPERTIES += persist.rmnet.data.enable=true \
-                            persist.data.wda.enable=true \
-                            persist.data.df.dl_mode=5 \
-                            persist.data.df.ul_mode=5 \
-                            persist.data.df.agg.dl_pkt=10 \
-                            persist.data.df.agg.dl_size=4096 \
-                            persist.data.df.mux_count=8 \
-                            persist.data.df.iwlan_mux=9 \
-                            persist.data.df.dev_name=rmnet_usb0
-
 # property to enable user to access Google WFD settings
 PRODUCT_VENDOR_PROPERTIES += persist.debug.wfd.enable=1
 
@@ -787,6 +776,8 @@ ifeq ($(TARGET_SINGLE_TREE), true)
 # # Some CTS test case failed after enabling feature config_stopSystemPackagesByDefault
 PRODUCT_PACKAGES += initial-package-stopped-states-aosp.xml
 endif
+
+PRODUCT_PACKAGES += android.hardware.thermal-service.example
 
 ###################################################################################
 # This is the End of target.mk file.
