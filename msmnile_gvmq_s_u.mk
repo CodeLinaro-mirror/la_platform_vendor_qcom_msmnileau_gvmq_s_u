@@ -468,7 +468,7 @@ PRODUCT_PACKAGES += \
 
 # Kernel modules install path
 KERNEL_MODULES_INSTALL := dlkm
-KERNEL_MODULES_OUT := out/target/product/msmnile_gvmq_s_u/$(KERNEL_MODULES_INSTALL)/lib/modules
+KERNEL_MODULES_OUT := out/target/product/$(TARGET_BOARD_PLATFORM)$(TARGET_BOARD_SUFFIX)$(TARGET_BOARD_DERIVATIVE_SUFFIX)/$(KERNEL_MODULES_INSTALL)/lib/modules
 
 #FEATURE_OPENGLES_EXTENSION_PACK support string config file
 PRODUCT_COPY_FILES += \
