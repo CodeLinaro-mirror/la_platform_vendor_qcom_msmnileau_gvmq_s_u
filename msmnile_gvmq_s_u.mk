@@ -776,6 +776,13 @@ PRODUCT_VENDOR_PROPERTIES += persist.vendor.car.lpm=true
 # default wifi country code
 PRODUCT_VENDOR_PROPERTIES += ro.boot.wificountrycode=us
 
+#Make this flag false if Symmetric slot switch is used
+TARGET_USES_ASYMMETRIC_SLOT_SWITCH := true
+
+ifeq ($(TARGET_USES_ASYMMETRIC_SLOT_SWITCH), true)
+  PRODUCT_PROPERTY_OVERRIDES += ro.vendor.asymmetric_support=true
+endif
+
 # The property "persist.bluetooth.enablenewavrcp" is introduced in AOSP.
 # See commit e63f6d6bda16bd94d43537fc5db754a103c6a757
 # (1) If the property is set as true, it indicates that AVRCP(TG) is enabled.
