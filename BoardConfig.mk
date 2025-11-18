@@ -338,6 +338,17 @@ endif
 #Enable VNDK Compliance
 BOARD_VNDK_VERSION:=current
 
+$(call add_soong_config_var,qti,IS_ANDROID_SHIPPING_U)
+$(call add_soong_config_var,qti,IS_ANDROID_SHIPPING_V)
+$(call add_soong_config_var,qti,IS_ANDROID_SHIPPING_W)
+ifeq ($(PLATFORM_SDK_VERSION),36)
+    $(call soong_config_set,qti,IS_ANDROID_SHIPPING_W,true)
+else ifeq ($(PLATFORM_SDK_VERSION),35)
+    $(call soong_config_set,qti,IS_ANDROID_SHIPPING_V,true)
+else
+    $(call soong_config_set,qti,IS_ANDROID_SHIPPING_U,true)
+endif
+
 #################################################################################
 # This is the End of BoardConfig.mk file.
 # Now, Pickup other split Board.mk files:
