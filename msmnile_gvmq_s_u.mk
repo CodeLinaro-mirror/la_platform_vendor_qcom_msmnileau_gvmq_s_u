@@ -61,6 +61,12 @@ PRODUCT_VENDOR_PROPERTIES += \
 SHIPPING_API_LEVEL := 32
 PRODUCT_SHIPPING_API_LEVEL := $(SHIPPING_API_LEVEL)
 
+#AR modules is not required for customer with SHIPPING_API_LEVEL 31
+#Disabled AR Audio modules specific to "msmnile_gvmq_s_u" lunch combo targets.
+ifeq ($(SHIPPING_API_LEVEL),31)
+include device/qcom/msmnile_gvmq_s_u/Disable_AR_modules.mk
+endif
+
 ifeq (true,$(call math_gt_or_eq,$(SHIPPING_API_LEVEL),34))
 # Enable support for APEX updates
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
