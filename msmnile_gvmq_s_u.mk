@@ -13,7 +13,11 @@ TARGET_DISABLE_DISPLAY_DLKM := false
 TARGET_DISABLE_AIS_DLKM := true
 TARGET_DISABLE_LIBVIRTDIAG := true
 
-TARGET_USES_CAS1.2 := false
+ifeq ($(PLATFORM_VERSION) ,$(filter U 14 UpsideDownCake, $(PLATFORM_VERSION)))
+  TARGET_USES_CAS1.2 := false
+else
+  TARGET_REQUIRES_HIDL_CAS_HAL := false
+endif
 
 AUDIO_USE_STUB_HAL := false
 # Skip VINTF checks for kernel configs since we do not have kernel source
@@ -51,7 +55,7 @@ $(warning "Compile using SINGLE TREE =" $(TARGET_SINGLE_TREE))
         AUDIO_FEATURE_ENABLED_SVA_MULTI_STAGE := true
 endif
 
-ifeq ($(PLATFORM_VERSION) ,$(filter W Baklava 16, $(PLATFORM_VERSION)))
+ifeq ($(PLATFORM_VERSION) ,$(filter W Baklava 16 CinnamonBun 17, $(PLATFORM_VERSION)))
    PRODUCT_SOONG_NAMESPACES += hardware/qcom/wlan/qcwcn
 endif
 
@@ -763,7 +767,7 @@ PRODUCT_VENDOR_PROPERTIES += ro.lmk.kill_heaviest_task=true \
                             ro.lmk.vmpressure_file_min=80640 \
 
 #Add this property for version less than Baklava
-ifeq ( ,$(filter W Baklava 16, $(PLATFORM_VERSION)))
+ifeq ( ,$(filter W Baklava 16 CinnamonBun 17, $(PLATFORM_VERSION)))
 PRODUCT_VENDOR_PROPERTIES += ro.lmk.use_minfree_levels=true
 endif
 
@@ -827,6 +831,13 @@ PRODUCT_PACKAGES += initial-package-stopped-states-aosp.xml
 endif
 
 PRODUCT_PACKAGES += android.hardware.thermal-service.example
+
+ifneq ( , $(filter bp4a cp2a, $(TARGET_RELEASE_PLATFORM)))
+AB_OTA_POSTINSTALL_CONFIG += \
+               RUN_POSTINSTALL_vendor=true \
+               FILESYSTEM_TYPE_vendor=ext4 \
+               POSTINSTALL_OPTIONAL_vendor=true
+endif
 
 ###################################################################################
 # This is the End of target.mk file.
