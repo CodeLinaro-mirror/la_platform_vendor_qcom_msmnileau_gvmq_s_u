@@ -517,8 +517,7 @@ PRODUCT_PACKAGES_DEBUG += bootctl
 
 #PRODUCT_PACKAGES += android.hardware.automotive.audiocontrol@1.0-service
 
-PRODUCT_PACKAGES += android.hardware.health-service.example \
-                    android.hardware.dumpstate-service.example
+PRODUCT_PACKAGES += android.hardware.dumpstate-service.example
 
 PRODUCT_PACKAGES += qcar-gsi.avbpubkey
 
