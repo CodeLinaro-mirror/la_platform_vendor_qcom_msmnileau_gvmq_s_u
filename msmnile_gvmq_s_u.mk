@@ -2,6 +2,8 @@ TARGET_BOARD_PLATFORM := msmnile
 TARGET_BOOTLOADER_BOARD_NAME := msmnile
 TARGET_BOARD_TYPE := auto
 TARGET_BOARD_SUFFIX := _gvmq
+TARGET_BOARD_DERIVATIVE_SUFFIX := _s_u
+
 ENABLE_AIDL_VHAL := true
 # U-BRINGUP disable display
 TARGET_DISABLE_DISPLAY := false
@@ -18,6 +20,11 @@ ifeq ($(PLATFORM_VERSION) ,$(filter U 14 UpsideDownCake, $(PLATFORM_VERSION)))
 else
   TARGET_REQUIRES_HIDL_CAS_HAL := false
 endif
+
+SHIPPING_API_LEVEL := 32
+PRODUCT_SHIPPING_API_LEVEL := $(SHIPPING_API_LEVEL)
+BOARD_SHIPPING_API_LEVEL := $(SHIPPING_API_LEVEL)
+BOARD_API_LEVEL_PROP_OVERRIDE := $(SHIPPING_API_LEVEL)
 
 AUDIO_USE_STUB_HAL := false
 # Skip VINTF checks for kernel configs since we do not have kernel source
@@ -61,9 +68,6 @@ endif
 
 PRODUCT_VENDOR_PROPERTIES += \
     ro.soc.manufacturer=$(PRODUCT_MANUFACTURER) \
-
-SHIPPING_API_LEVEL := 32
-PRODUCT_SHIPPING_API_LEVEL := $(SHIPPING_API_LEVEL)
 
 #AR modules is not required for customer with SHIPPING_API_LEVEL 31
 #Disabled AR Audio modules specific to "msmnile_gvmq_s_u" lunch combo targets.
@@ -148,8 +152,6 @@ ifeq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
   BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT := true
   PRODUCT_BUILD_SUPER_PARTITION := true
   PRODUCT_BUILD_RAMDISK_IMAGE := true
-  # Enable System_ext
-  PRODUCT_BUILD_SYSTEM_EXT_IMAGE := true
   PRODUCT_PACKAGES += fastbootd
    # Add default implementation of fastboot AIDL.
   PRODUCT_PACKAGES += android.hardware.fastboot-service.example_recovery
@@ -166,26 +168,24 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/fstab_non_AB_dynamic_partition_variant.qti:$
 PRODUCT_COPY_FILES += device/qcom/msmnile_gvmq/fstab_non_AB_dynamic_partition_variant.gen4.qti:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.gen4.qcom
 endif
 endif
-#PRODUCT_BUILD_SYSTEM_IMAGE := true
 
 PRODUCT_BUILD_SYSTEM_IMAGE := false
+PRODUCT_BUILD_SYSTEM_EXT_IMAGE := false
 PRODUCT_BUILD_PRODUCT_IMAGE := false
 TARGET_SKIP_OTA_PACKAGE := true
 ifeq ($(TARGET_SINGLE_TREE), true)
   PRODUCT_BUILD_SYSTEM_IMAGE := true
+  PRODUCT_BUILD_SYSTEM_EXT_IMAGE := true
   PRODUCT_BUILD_PRODUCT_IMAGE := true
   TARGET_SKIP_OTA_PACKAGE := false
 endif
 
-
 PRODUCT_BUILD_SYSTEM_OTHER_IMAGE := false
-#PRODUCT_BUILD_VENDOR_IMAGE := true
-#PRODUCT_BUILD_PRODUCT_IMAGE := false
 PRODUCT_BUILD_PRODUCT_SERVICES_IMAGE := false
-#PRODUCT_BUILD_ODM_IMAGE := true
 PRODUCT_BUILD_CACHE_IMAGE := false
 PRODUCT_BUILD_RAMDISK_IMAGE := true
 PRODUCT_BUILD_USERDATA_IMAGE := true
+PRODUCT_BUILD_VENDOR_IMAGE := true
 PRODUCT_BUILD_VENDOR_BOOT_IMAGE := true
 PRODUCT_BUILD_VENDOR_DLKM_IMAGE := true
 PRODUCT_BUILD_SYSTEM_DLKM_IMAGE := true
@@ -229,8 +229,6 @@ $(call inherit-product, packages/services/Car/car_product/build/car.mk)
 PRODUCT_NAME := msmnile_gvmq_s_u
 PRODUCT_BRAND := qti
 PRODUCT_MODEL := msmnile_gvmq_s_u for arm64
-#TARGET_BOARD_SUFFIX := _gvmq
-TARGET_BOARD_DERIVATIVE_SUFFIX := _s_u
 
 ###########
 #QMAA flags starts
