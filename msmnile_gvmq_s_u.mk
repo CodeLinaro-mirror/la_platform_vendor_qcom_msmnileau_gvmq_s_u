@@ -686,7 +686,9 @@ PRODUCT_VENDOR_PROPERTIES += audio.offload.gapless.enabled=true
 PRODUCT_VENDOR_PROPERTIES += sys.qca1530=detect
 
 # Enable stm events
-PRODUCT_VENDOR_PROPERTIES += persist.debug.coresight.config=stm-events
+ifeq ($(TARGET_SINGLE_TREE), true)
+PRODUCT_SYSTEM_PROPERTIES += persist.debug.coresight.config=stm-events
+endif
 
 # hwui properties
 PRODUCT_VENDOR_PROPERTIES += ro.hwui.texture_cache_size=72 \
