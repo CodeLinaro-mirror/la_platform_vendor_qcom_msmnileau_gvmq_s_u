@@ -831,7 +831,7 @@ ifeq ($(TARGET_SINGLE_TREE), true)
 PRODUCT_PACKAGES += initial-package-stopped-states-aosp.xml
 endif
 
-PRODUCT_PACKAGES += android.hardware.thermal-service.example
+PRODUCT_PACKAGES += com.android.hardware.thermal
 
 ifneq ( , $(filter bp4a cp2a, $(TARGET_RELEASE_PLATFORM)))
 AB_OTA_POSTINSTALL_CONFIG += \
