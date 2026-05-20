@@ -690,7 +690,8 @@ PRODUCT_SYSTEM_PROPERTIES += persist.debug.coresight.config=stm-events
 endif
 
 # hwui properties
-PRODUCT_VENDOR_PROPERTIES += ro.hwui.texture_cache_size=72 \
+ifeq ($(TARGET_SINGLE_TREE), true)
+PRODUCT_SYSTEM_PROPERTIES += ro.hwui.texture_cache_size=72 \
                             ro.hwui.layer_cache_size=48 \
                             ro.hwui.r_buffer_cache_size=8 \
                             ro.hwui.path_cache_size=32 \
@@ -700,7 +701,8 @@ PRODUCT_VENDOR_PROPERTIES += ro.hwui.texture_cache_size=72 \
                             ro.hwui.text_small_cache_width=1024 \
                             ro.hwui.text_small_cache_height=1024 \
                             ro.hwui.text_large_cache_width=2048 \
-                            ro.hwui.text_large_cache_height=1024 \
+                            ro.hwui.text_large_cache_height=1024
+endif
 
 PRODUCT_VENDOR_PROPERTIES += config.disable_rtt=true
 
