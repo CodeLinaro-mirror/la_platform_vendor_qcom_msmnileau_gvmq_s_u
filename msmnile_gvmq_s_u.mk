@@ -24,7 +24,6 @@ endif
 SHIPPING_API_LEVEL := 31
 PRODUCT_SHIPPING_API_LEVEL := $(SHIPPING_API_LEVEL)
 BOARD_SHIPPING_API_LEVEL := $(SHIPPING_API_LEVEL)
-BOARD_API_LEVEL_PROP_OVERRIDE := $(SHIPPING_API_LEVEL)
 
 AUDIO_USE_STUB_HAL := false
 # Skip VINTF checks for kernel configs since we do not have kernel source
@@ -343,7 +342,6 @@ ENABLE_MEMTRACK_AIDL_HAL := true
 
 -include $(QCPATH)/common/config/qtic-config.mk
 
-PRODUCT_BOOT_JARS += tcmiface
 
 ifneq ($(TARGET_NO_TELEPHONY), true)
  PRODUCT_BOOT_JARS += telephony-ext
@@ -832,7 +830,7 @@ ifeq ($(TARGET_SINGLE_TREE), true)
 PRODUCT_PACKAGES += initial-package-stopped-states-aosp.xml
 endif
 
-PRODUCT_PACKAGES += android.hardware.thermal-service.example
+PRODUCT_PACKAGES += com.android.hardware.thermal
 
 ifneq ( , $(filter bp4a cp2a, $(TARGET_RELEASE_PLATFORM)))
 AB_OTA_POSTINSTALL_CONFIG += \
