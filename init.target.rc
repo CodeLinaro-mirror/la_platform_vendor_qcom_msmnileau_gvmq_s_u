@@ -71,6 +71,9 @@ on property:vendor.gdb.dump=true
     chmod 0777 data/core
     write /proc/sys/kernel/core_pattern "/data/core/core.%e.%p.%h.%t"
 
+on late-init
+    start automotive_display
+
 on fs
     mount_all --early
     chown root system /mnt/vendor/persist
